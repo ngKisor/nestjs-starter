@@ -12,8 +12,8 @@
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
-    "migrate": "",
-    "seed": "npx prisma db seed",
+    "prisma:migrate": "npx prisma migrate dev",
+    "prisma:seed": "npx prisma db seed",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -75,6 +75,7 @@
     "testEnvironment": "node"
   },
   "prisma": {
+    "schema": "./prisma/models/schema.prisma",
     "seed": "ts-node prisma/seeds/seed.ts"
   }
 }

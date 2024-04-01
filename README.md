@@ -9,7 +9,21 @@
 - [Node.js](https://nodejs.org/en/download)
 - [PNPM](https://pnpm.io/installation)
 - [NPM](https://docs.npmjs.com/getting-started/installing-node)
-- [PostgreSQL](https://www.postgresql.org/download/)
+- [PostgreSQL](https://www.postgresql.org/download/) 
+
+
+### DB Setup Using docker-compose
+
+Use [docker-compose](https://docs.docker.com/compose/) to quickly bring up pre-configured Postgres database container. 
+
+Bring up stack,
+
+    $ docker-compose up
+
+
+Bring down stack,
+
+    $ docker-compose down  
 
 ---
 
@@ -21,6 +35,8 @@ Packages:
 - [ESLint](http://eslint.org/) for code linting
 - [Prettier](https://www.npmjs.com/package/prettier) for code formatting
 - [dotenv](https://www.npmjs.com/package/dotenv) for configuration management
+- [class-validator](https://github.com/typestack/class-validator) for validation
+- [class-transformer](https://github.com/typestack/class-transformer) for data transformation
 
 
 ## Setup
@@ -33,6 +49,11 @@ Clone the repository, install the dependencies and get started right away.
     $ pnpm install
 
 Make a copy of `.env.example` as `.env` and update your application details and database credentials.
+
+Run the migrations and seed the database.
+
+    $ pnpm prisma:migrate
+    $ pnpm prisma:seed
 
 ## Running the app
 
@@ -48,6 +69,7 @@ $ pnpm run start:prod
 ```
 
 Navigate to http://localhost:8080/api/ to verify installation.
+
 
 ## Test
 
