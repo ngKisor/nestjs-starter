@@ -9,16 +9,16 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url="postgresql://ngkisor:admin11@localhost:5432/mydb?schema=public"
+  url      = "postgresql://ngkisor:admin11@localhost:5432/mydb?schema=public"
 }
-  // url      = env("DATABASE_URL")
 
+// url      = env("DATABASE_URL")
 
 // add new model for database table
 model User {
-  id          Int      @id @default(autoincrement())
-  username       String   @unique
-  isVerified   Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  username   String   @unique
+  isVerified Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }

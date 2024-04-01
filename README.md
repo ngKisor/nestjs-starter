@@ -18,7 +18,6 @@ Packages:
 - [Prisma](https://www.prisma.io/) ORM
 - [PostgreSQL](https://www.postgresql.org/)
 - [nestjs/swagger](https://docs.nestjs.com/openapi/introduction) for API documentation
-- [Docker](https://docs.docker.com/engine/docker-overview/) support for Development and Production
 - [ESLint](http://eslint.org/) for code linting
 - [Prettier](https://www.npmjs.com/package/prettier) for code formatting
 - [dotenv](https://www.npmjs.com/package/dotenv) for configuration management
