@@ -3,6 +3,10 @@ import { UsersService } from '../services/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { ApiTags } from '@nestjs/swagger';
+import { UserEntity } from '../entities/user.entity';
+import { AuthGuard } from '@nestjs/passport';
+import { UseGuards } from '@nestjs/common';
+
 
 @Controller('users')
 @ApiTags('users')
@@ -15,11 +19,13 @@ export class UsersController {
   }
 
   @Get()
-  findAll() {
-    return this.usersService.findAll();
+  async findAll() {
+    const user = await this.usersService.findAll();
+    return new UserEntity(user)
   }
 
   @Get('verified')
+  @UseGuards(AuthGuard('jwt'))
   findVerified() {
     return this.usersService.getVerifiedUsers();
   }

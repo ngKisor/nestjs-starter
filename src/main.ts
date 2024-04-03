@@ -8,6 +8,9 @@ import { PrismaClientExceptionFilter } from './common/filters/prisma-client-exce
 async function bootstrap() {
   config()
   const app = await NestFactory.create(AppModule);
+
+  app.enableCors();
+
 // apply global pipes for validation https://docs.nestjs.com/techniques/validation#using-the-built-in-validationpipe
   app.useGlobalPipes(new ValidationPipe());
 

@@ -6,7 +6,9 @@ import { PrismaService } from 'src/prisma/services/prisma.service';
 @Injectable()
 export class UsersService {
 
-  constructor(private readonly prismaService: PrismaService) {
+  constructor(
+    private readonly prismaService: PrismaService,
+  ) {
 
   }
 
@@ -23,6 +25,7 @@ export class UsersService {
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
+
     return this.prismaService.user.update({
       where: { id: id },
       data: updateUserDto
@@ -34,7 +37,6 @@ export class UsersService {
       where: { id: id }
     })
   }
-
   getVerifiedUsers() {
     return this.prismaService.user.findMany({ where: { isVerified: true } });
   }

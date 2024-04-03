@@ -4,12 +4,22 @@ import {IsBoolean, IsNotEmpty, IsString} from 'class-validator';
 
 export class CreateUserDto {
     // @ApiProperty() for Swagger
+
     @ApiProperty()
     @IsString()
     @IsNotEmpty()
-    username: string;
+    name: string;
+
+    @ApiProperty()
+    @IsString()
+    @IsNotEmpty()
+    email: string;
 
     @ApiProperty({ default: false })
     @IsBoolean()
     isVerified: boolean;
+
+    @ApiProperty({ default: false })
+    @IsBoolean()
+    isActive: boolean;
 }

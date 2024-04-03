@@ -1,30 +1,31 @@
 
 import { PrismaClient } from '@prisma/client';
-
+import * as bcrypt from 'bcrypt';
 // initialize Prisma Client
 const prisma = new PrismaClient();
 
 async function main() {
+
   // create two dummy users
-  const post1 = await prisma.user.upsert({
-    where: { username: 'random_username' },
+  const user1 = await prisma.user.upsert({
+    where: { email: 'email@gmail.com' },
     update: {},
     create: {
-      username: 'random_username',
+      email: 'email@gmail.com',
       isVerified: false,
     },
   });
 
-  const post2 = await prisma.user.upsert({
-    where: { username: "next_username" },
+  const user2 = await prisma.user.upsert({
+    where: { email: "email1@gmail.com" },
     update: {},
     create: {
-      username: "next_username",
+      email: "email1@gmail.com",
       isVerified: true,
     },
   });
 
-  console.log({ post1, post2 });
+  console.log({ user1, user2 });
 }
 
 // execute the main function

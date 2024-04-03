@@ -17,8 +17,10 @@ datasource db {
 // add new model for database table
 model User {
   id         Int      @id @default(autoincrement())
-  username   String   @unique
+  name       String?
+  email      String   @unique
   isVerified Boolean  @default(false)
+  isActive   Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
