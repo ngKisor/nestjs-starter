@@ -11,20 +11,6 @@
 - [NPM](https://docs.npmjs.com/getting-started/installing-node)
 - [PostgreSQL](https://www.postgresql.org/download/) 
 
-
-### DB Setup Using docker-compose
-
-Use [docker-compose](https://docs.docker.com/compose/) to quickly bring up pre-configured Postgres database container. 
-
-Bring up stack,
-
-    $ docker-compose up
-
-
-Bring down stack,
-
-    $ docker-compose down  
-
 ---
 
 Packages:
@@ -69,6 +55,28 @@ $ pnpm run start:prod
 ```
 
 Navigate to http://localhost:8080/api/ to verify installation.
+
+
+## Using Docker
+
+### Using docker-compose
+
+Use [docker-compose](https://docs.docker.com/compose/) to quickly bring up a stack with pre-configured Postgres database container. Data is ephemeral and containers will disappear when stack is removed.
+
+Specific configuration for Docker is in `.env.docker`
+
+- `0.0.0.0` as `$APP_HOST` to expose app on Docker network interface
+- Pre-configured Postgres settings - can be updated to point to another Postgres host
+
+Bring up stack,
+
+    $ docker-compose up
+
+Navigate to http://localhost:8848/api-docs/ to verify application is running from docker.
+
+Bring down stack,
+
+    $ docker-compose down
 
 
 ## Test

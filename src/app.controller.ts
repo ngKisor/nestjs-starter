@@ -6,8 +6,6 @@ export class AppController {
 
   @Get()
   getHello(): any {
-    return {
-      health_check:'ok'
-    }
+    return 'ok!'
   }
 }
