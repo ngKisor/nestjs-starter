@@ -20,7 +20,8 @@ Packages:
 - [nestjs/swagger](https://docs.nestjs.com/openapi/introduction) for API documentation
 - [ESLint](http://eslint.org/) for code linting
 - [Prettier](https://www.npmjs.com/package/prettier) for code formatting
-- [dotenv](https://www.npmjs.com/package/dotenv) for configuration management
+- [SigNoz](https://signoz.io/) for Instrumentation
+- [Pino](https://www.npmjs.com/package/nestjs-pino) for Log management
 - [class-validator](https://github.com/typestack/class-validator) for validation
 - [class-transformer](https://github.com/typestack/class-transformer) for data transformation
 

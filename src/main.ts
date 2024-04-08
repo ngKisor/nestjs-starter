@@ -3,14 +3,20 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 import { PrismaClientExceptionFilter } from './common/filters/prisma-client-exception.filters';
+import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
 import tracer from './tracer';
 
 async function bootstrap() {
-  
+
   // instrumentation
   await tracer.start();
 
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { bufferLogs: true });
+
+  // logger with pino
+  app.useLogger(app.get(Logger));
+  // log more details on http errors
+  app.useGlobalInterceptors(new LoggerErrorInterceptor());
 
   app.enableCors();
 

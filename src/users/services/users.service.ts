@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
 import { PrismaService } from 'src/prisma/services/prisma.service';
@@ -6,6 +6,7 @@ import { PrismaService } from 'src/prisma/services/prisma.service';
 @Injectable()
 export class UsersService {
 
+  private readonly logger = new Logger(UsersService.name);
   constructor(
     private readonly prismaService: PrismaService,
   ) {
@@ -13,6 +14,7 @@ export class UsersService {
   }
 
   create(createUserDto: CreateUserDto) {
+    this.logger.log(`user created in progress with ${createUserDto} `)
     return this.prismaService.user.create({ data: createUserDto });
   }
 
