@@ -1,0 +1,7 @@
+
+export enum AppEventTypes {
+    USER_CREATED = 'USER_CREATED',
+    AUTH_COMPLETED = 'AUTH_COMPLETED',
+    AUTH_FAILED = 'AUTH_FAILED',
+    TEST_EVENT = 'TEST_EVENT',
+}
