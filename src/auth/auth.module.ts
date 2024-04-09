@@ -3,12 +3,10 @@ import { AuthController } from './controllers/auth.controller';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './services/jwt.strategy';
 
-
 @Module({
-  imports: [
-    PassportModule.register({ defaultStrategy: 'jwt' })],
+  imports: [PassportModule.register({ defaultStrategy: 'jwt' })],
   controllers: [AuthController],
   providers: [JwtStrategy],
-  exports: [PassportModule]
+  exports: [PassportModule],
 })
-export class AuthModule { }
+export class AuthModule {}

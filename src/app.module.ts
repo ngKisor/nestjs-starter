@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { ConfigModule } from '@nestjs/config'
+import { ConfigModule } from '@nestjs/config';
 import { LoggerModule } from 'nestjs-pino';
 
 @Module({
@@ -22,8 +22,8 @@ import { LoggerModule } from 'nestjs-pino';
     }),
     ConfigModule.forRoot(),
     AuthModule,
-    UsersModule
+    UsersModule,
   ],
   controllers: [AppController],
 })
-export class AppModule { }
+export class AppModule {}

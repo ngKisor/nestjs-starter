@@ -6,43 +6,41 @@ import { passportJwtSecret } from 'jwks-rsa';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
-    constructor(
-    ) {
-        // local authentication    
-        // super({
-        //     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-        //     secretOrKey: process.env.JWT_SECRET
-        // });
+  constructor() {
+    // local authentication
+    // super({
+    //     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    //     secretOrKey: process.env.JWT_SECRET
+    // });
 
-        super({
-            secretOrKeyProvider: passportJwtSecret({
-                cache: true,
-                rateLimit: true,
-                jwksRequestsPerMinute: 5,
-                jwksUri: `${process.env.AUTH0_ISSUER_URL}.well-known/jwks.json`,
-            }),
+    super({
+      secretOrKeyProvider: passportJwtSecret({
+        cache: true,
+        rateLimit: true,
+        jwksRequestsPerMinute: 5,
+        jwksUri: `${process.env.AUTH0_ISSUER_URL}.well-known/jwks.json`,
+      }),
 
-            jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            audience: process.env.AUTH0_AUDIENCE,
-            issuer: `${process.env.AUTH0_ISSUER_URL}`,
-            algorithms: ['RS256'],
-        });
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      audience: process.env.AUTH0_AUDIENCE,
+      issuer: `${process.env.AUTH0_ISSUER_URL}`,
+      algorithms: ['RS256'],
+    });
+  }
 
-    }
+  // local validation without auth 0
+  // async validate(payload: { userId: number }) {
+  //     const user = await this.usersService.findOne(payload.userId);
 
-    // local validation without auth 0
-    // async validate(payload: { userId: number }) {
-    //     const user = await this.usersService.findOne(payload.userId);
+  //     if (!user) {
+  //         throw new UnauthorizedException();
+  //     }
 
-    //     if (!user) {
-    //         throw new UnauthorizedException();
-    //     }
+  //     return user;
+  // }
 
-    //     return user;
-    // }
-
-    // Auth0 handles all of the user authentication tasks for you in your tenant
-    validate(payload: unknown): unknown {
-        return payload;
-    }
+  // Auth0 handles all of the user authentication tasks for you in your tenant
+  validate(payload: unknown): unknown {
+    return payload;
+  }
 }

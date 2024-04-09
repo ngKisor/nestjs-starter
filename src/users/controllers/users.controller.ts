@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, NotFoundException } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
+  NotFoundException,
+} from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { CreateUserDto } from '../dto/create-user.dto';
 import { UpdateUserDto } from '../dto/update-user.dto';
@@ -7,11 +17,10 @@ import { UserEntity } from '../entities/user.entity';
 import { AuthGuard } from '@nestjs/passport';
 import { UseGuards } from '@nestjs/common';
 
-
 @Controller('users')
 @ApiTags('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) { }
+  constructor(private readonly usersService: UsersService) {}
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {
@@ -21,7 +30,7 @@ export class UsersController {
   @Get()
   async findAll() {
     const user = await this.usersService.findAll();
-    return new UserEntity(user)
+    return new UserEntity(user);
   }
 
   @Get('verified')
@@ -31,19 +40,21 @@ export class UsersController {
   }
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
-
     const user = await this.usersService.findOne(id);
     if (!user) {
-      throw new NotFoundException(`User with id ${id} doesnot exists`)
+      throw new NotFoundException(`User with id ${id} doesnot exists`);
     }
     return user;
   }
 
   @Patch(':id')
-  async update(@Param('id', ParseIntPipe) id: number, @Body() updateUserDto: UpdateUserDto) {
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
     const user = await this.usersService.findOne(id);
     if (!user) {
-      throw new NotFoundException(`User with id ${id} doesnot exists`)
+      throw new NotFoundException(`User with id ${id} doesnot exists`);
     }
     return this.usersService.update(id, updateUserDto);
   }
@@ -52,7 +63,7 @@ export class UsersController {
   async remove(@Param('id', ParseIntPipe) id: number) {
     const user = await this.usersService.findOne(id);
     if (!user) {
-      throw new NotFoundException(`User with id ${id} doesnot exists`)
+      throw new NotFoundException(`User with id ${id} doesnot exists`);
     }
     return this.usersService.remove(id);
   }

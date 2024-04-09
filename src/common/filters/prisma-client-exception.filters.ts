@@ -20,7 +20,7 @@ export class PrismaClientExceptionFilter extends BaseExceptionFilter {
         break;
       }
 
-    //   add cases accordingly https://www.prisma.io/docs/orm/reference/error-reference#prisma-client-query-engine
+      //   add cases accordingly https://www.prisma.io/docs/orm/reference/error-reference#prisma-client-query-engine
       default:
         // default 500 error code
         super.catch(exception, host);

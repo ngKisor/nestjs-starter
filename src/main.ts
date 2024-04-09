@@ -7,7 +7,6 @@ import { Logger, LoggerErrorInterceptor } from 'nestjs-pino';
 import tracer from './tracer';
 
 async function bootstrap() {
-
   // instrumentation
   await tracer.start();
 
