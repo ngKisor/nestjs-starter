@@ -9,10 +9,8 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://ngkisor:admin11@localhost:5432/mydb?schema=public"
+  url      = env("DB_URL")
 }
-
-// url      = env("DATABASE_URL")
 
 // add new model for database table
 model User {

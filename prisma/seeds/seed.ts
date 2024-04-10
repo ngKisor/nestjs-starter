@@ -24,8 +24,6 @@ async function main() {
       isVerified: true,
     },
   });
-
-  console.log({ user1, user2 });
 }
 
 // execute the main function

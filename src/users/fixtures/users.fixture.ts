@@ -9,7 +9,7 @@ export const mockUser1 = {
 };
 
 export const mockUser2 = {
-  id: 1,
+  id: 2,
   name: 'verified',
   email: 'verifieduser@gmail.com',
   isActive: false,
