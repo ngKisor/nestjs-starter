@@ -29,8 +29,8 @@ export class UsersController {
 
   @Get()
   async findAll() {
-    const user = await this.usersService.findAll();
-    return new UserEntity(user);
+    const users = await this.usersService.findAll();
+    return users.map((user) => new UserEntity(user));
   }
 
   @Get('verified')
