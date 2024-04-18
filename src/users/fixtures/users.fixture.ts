@@ -18,7 +18,6 @@ export const mockUser2 = {
   updatedAt: new Date('2024/01/01'),
 };
 
-
 export const mockDeleteResponse = {
   deleted: true,
-}
+};

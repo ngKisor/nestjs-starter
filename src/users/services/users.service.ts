@@ -6,7 +6,7 @@ import { PrismaService } from './../../prisma/services/prisma.service';
 @Injectable()
 export class UsersService {
   private readonly logger = new Logger(UsersService.name);
-  constructor(private readonly prismaService: PrismaService) { }
+  constructor(private readonly prismaService: PrismaService) {}
 
   create(createUserDto: CreateUserDto) {
     return this.prismaService.user.create({ data: createUserDto });

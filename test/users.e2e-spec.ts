@@ -37,17 +37,13 @@ describe('(e2e) Users', () => {
   });
 
   it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('ok!');
+    return request(app.getHttpServer()).get('/').expect(200).expect('ok!');
   });
 
   describe('GET /users', () => {
     it('returns a list of users', async () => {
-      const { status, body } = await request(app.getHttpServer()).get(
-        '/users',
-      );
+      const { status, body } = await request(app.getHttpServer()).get('/users');
+
       expect(status).toBe(200);
       expect(body).toStrictEqual(expect.arrayContaining([userObject]));
       expect(body).toHaveLength(2);
@@ -81,7 +77,7 @@ describe('(e2e) Users', () => {
     });
 
     it('fails to return non existing user', async () => {
-      const { status, body } = await request(app.getHttpServer()).get(
+      const { status } = await request(app.getHttpServer()).get(
         `/users/122220`,
       );
 

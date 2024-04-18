@@ -1,15 +1,16 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersService } from './users.service';
 import { PrismaService } from './../../prisma/services/prisma.service';
-import { mockUser1, mockUser2, mockDeleteResponse } from '../fixtures/users.fixture';
+import {
+  mockUser1,
+  mockUser2,
+  mockDeleteResponse,
+} from '../fixtures/users.fixture';
 import { BadRequestException } from '@nestjs/common';
 // import { DeepMockProxy, mockDeep, mockReset } from 'jest-mock-extended';
-// TODO dynamic mocking with jest-mock-extended 
+// TODO dynamic mocking with jest-mock-extended
 
-const mockUserData = [
-  { ...mockUser1 },
-  { ...mockUser2 }
-]
+const mockUserData = [{ ...mockUser1 }, { ...mockUser2 }];
 const prismaServiceMock = {
   user: {
     findMany: jest.fn().mockResolvedValue(mockUserData),
@@ -24,7 +25,6 @@ describe('Service: UsersService', () => {
   let prismaMock: PrismaService;
 
   beforeEach(async () => {
-
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         UsersService,
@@ -49,7 +49,7 @@ describe('Service: UsersService', () => {
 
   describe('method: findOne', () => {
     it('should get a single user', async () => {
-      let uniqueUser = await userService.findOne(1);
+      const uniqueUser = await userService.findOne(1);
 
       expect(uniqueUser).toEqual(mockUser1);
     });
@@ -57,7 +57,7 @@ describe('Service: UsersService', () => {
 
   describe('method: create', () => {
     it('should create a new user', async () => {
-      let newUser = await userService.create({ ...mockUser1 });
+      const newUser = await userService.create({ ...mockUser1 });
 
       expect(newUser).toEqual(mockUser1);
     });
@@ -76,9 +76,11 @@ describe('Service: UsersService', () => {
 
   describe('method: remove', () => {
     it('should remove and return {deleted: true}', async () => {
-      jest.spyOn(prismaMock.user, 'delete').mockResolvedValue(mockDeleteResponse as any);
+      jest
+        .spyOn(prismaMock.user, 'delete')
+        .mockResolvedValue(mockDeleteResponse as any);
 
-      let removedUser = await userService.remove(1);
+      const removedUser = await userService.remove(1);
 
       expect(removedUser).toEqual(mockDeleteResponse);
     });

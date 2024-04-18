@@ -13,17 +13,19 @@ describe('Controller: UsersController', () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [PrismaModule],
       controllers: [UsersController],
-      providers: [{
-        provide: UsersService,
-        useValue: {
-          create: jest.fn(),
-          findAll: jest.fn(),
-          getVerifiedUsers: jest.fn(),
-          findOne: jest.fn(),
-          update: jest.fn(),
-          remove: jest.fn(),
+      providers: [
+        {
+          provide: UsersService,
+          useValue: {
+            create: jest.fn(),
+            findAll: jest.fn(),
+            getVerifiedUsers: jest.fn(),
+            findOne: jest.fn(),
+            update: jest.fn(),
+            remove: jest.fn(),
+          },
         },
-      }],
+      ],
     }).compile();
 
     controller = module.get<UsersController>(UsersController);
@@ -35,17 +37,16 @@ describe('Controller: UsersController', () => {
   });
 
   describe('method: findAll', () => {
-    const mockUsers = [mockUser1]
+    const mockUsers = [mockUser1];
     it('should get list of users', async () => {
       jest.spyOn(userService, 'findAll').mockResolvedValueOnce(mockUsers);
 
       const users = await controller.findAll();
-      
+
       expect(users).toEqual(mockUsers);
       expect(userService.findAll).toHaveBeenCalledTimes(1);
     });
   });
-
 
   describe('method: remove', () => {
     it('should remove a user', async () => {
@@ -62,7 +63,9 @@ describe('Controller: UsersController', () => {
 
     it('should throw NotFoundException if user does not exist', async () => {
       const userId = 1;
-      const error = new NotFoundException(`User with id ${userId} doesnot exists`);
+      const error = new NotFoundException(
+        `User with id ${userId} doesnot exists`,
+      );
 
       jest.spyOn(userService, 'findOne').mockResolvedValueOnce(undefined);
       jest.spyOn(controller, 'remove').mockImplementationOnce(() => {
