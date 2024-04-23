@@ -1,62 +1,77 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import * as fs from 'fs';
 import { Lock } from './common/utils/lock.util';
 
 @Controller()
 export class AppController {
   constructor() {
-    this.testLockUtil()
+    // this.testLockUtil()
   }
 
-  testLockUtil() {
+  counter: number = 1000;
 
-    const lock = new Lock();
+  // testLockUtil() {
 
-    async function testFileOp(filename, data, resourceId) {
-      await lock.waitUntilAvailable(resourceId); // Wait until the file is available
-      await lock.lock(resourceId); // Lock the file
+  //   const lock = new Lock();
 
-      try {
-        // Read existing content from file
-        let existingData = '';
-        try {
-          existingData = fs.readFileSync(filename, 'utf8');
-        } catch (error) {
-          // File doesn't exist yet
-        }
+  //   async function testFileOp(filename, data, resourceId) {
+  //     await lock.waitUntilAvailable(resourceId); // Wait until the file is available
+  //     await lock.lock(resourceId); // Lock the file
 
-        // Append new data to existing content
-        const newData = existingData + data;
+  //     try {
+  //       // Read existing content from file
+  //       let existingData = '';
+  //       try {
+  //         existingData = fs.readFileSync(filename, 'utf8');
+  //       } catch (error) {
+  //         // File doesn't exist yet
+  //       }
 
-        // Write combined data back to file
-        fs.writeFileSync(filename, newData);
+  //       // Append new data to existing content
+  //       const newData = existingData + data;
 
-        console.log(`Data '${data}' written to file '${filename}'`);
-      } finally {
-        lock.unlock(resourceId); // Unlock the file
-      }
-    }
+  //       // Write combined data back to file
+  //       fs.writeFileSync(filename, newData);
 
-    // Perform multiple asynchronous operations to read and write to different files
-    async function run() {
-      let i = 1;
-      const filename = `file${i}.txt`;
-      const resourceId = `file${i}`;
-      const data = `Data ${i}\n`;
+  //       console.log(`Data '${data}' written to file '${filename}'`);
+  //     } finally {
+  //       lock.unlock(resourceId); // Unlock the file
+  //     }
+  //   }
 
-      testFileOp(filename, data, resourceId);
-      setTimeout(() => {
-        testFileOp(filename, data, resourceId);
-      }, 1)
+  //   // Perform multiple asynchronous operations to read and write to different files
+  //   async function run() {
+  //     let i = 1;
+  //     const filename = `file${i}.txt`;
+  //     const resourceId = `file${i}`;
+  //     const data = `Data ${i}\n`;
 
-    }
+  //     testFileOp(filename, data, resourceId);
+  //     setTimeout(() => {
+  //       testFileOp(filename, data, resourceId);
+  //     }, 1)
 
-    run();
+  //   }
 
-  }
+  //   run();
+
+  // }
 
   @Get()
   getHello(): any {
-    return 'ok!'
+    return this.counter;
+  }
+
+  @Post('increment')
+  increment(): any {
+    this.counter++;
+    return 'increased'
+
+  }
+  @Post('decrement')
+  decrement(): any {
+    this.counter--;
+
+    return 'decreased'
   }
 }
